@@ -11,6 +11,8 @@ use \Main\ListAction;
 use \Main\ListFilter;
 use \Main\QueryStringItem;
 
+$username = $_SESSION["username"];
+
 $queries = array();
 parse_str($_SERVER['QUERY_STRING'], $queries);
 
@@ -45,7 +47,7 @@ $actions[] = $action;
 $action = new ListAction("Delete", "DeleteDeckCard", "Remove Copy", $querystringItems);
 $actions[] = $action; 
 
-$deckDataList = new DataList("deckCards", "Id", $conn);
+$deckDataList = new DataList($username, "deckCards", "Id", $conn);
 $deckListSQL = "Select c.Name, Max(dc.Id) as Id, Count(*) as Copies from DeckCard dc join Card c on dc.Card = c.Id where dc.Deck = $deckId group by c.Name";
 $deckDataList->PopulateActions($actions);
 $deckDataList->GetDataManualSQL($deckListSQL);
@@ -69,7 +71,7 @@ $cardActions = [];
 $action = new ListAction("AddCard", "AddDeckCard", "Add card to deck", $querystringItems);
 $cardActions[] = $action;
 
-$cardDataList = new DataList("card", "Id", $conn);
+$cardDataList = new DataList($username, "card", "Id", $conn);
 $cardDataList->PopulateActions($cardActions);
 $cardDataList->BuildFilter($filters);
 $cardDataList->GetData();

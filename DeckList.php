@@ -45,7 +45,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 
 <?php
-$deckDataList = new DataList("deck", "Id", $conn);
+$deckDataList = new DataList($username, "deck", "Id", $conn);
 $deckDataList->PopulateActions($actions);
 $deckDataList->BuildFilter($filters);
 $deckDataList->GetData();

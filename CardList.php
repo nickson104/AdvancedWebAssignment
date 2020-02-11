@@ -50,7 +50,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 
 <?php
-$cardDataList = new DataList("card", "Id", $conn);
+$cardDataList = new DataList($username, "card", "Id", $conn);
 $cardDataList->PopulateActions($actions);
 $cardDataList->BuildFilter($filters);
 $cardDataList->GetData();

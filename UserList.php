@@ -9,6 +9,8 @@ use \Main\DataList;
 use \Main\ListFilter;
 use \Main\ListAction;
 
+$username = $_SESSION["username"];
+
 $usernameFilter = "";
 $adminFilter = isset($_POST['adminFilter']) && $_POST['adminFilter']  ? 1 : 0;
 
@@ -55,7 +57,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 
 <?php
-$userDataList = new DataList("user", "Username", $conn);
+$userDataList = new DataList($username, "user", "Username", $conn);
 $userDataList->PopulateActions($actions);
 $userDataList->BuildFilter($filters);
 $userDataList->GetData();

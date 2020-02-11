@@ -3,31 +3,39 @@ namespace Main;
 
 require_once 'ListFilter.php';
 require_once 'ListAction.php';
+require_once "TextLogger.php";
 
+use \Interfaces\TextLogger;
 use \Main\ListFilter;
-
 
 class DataList
 {
+	private $_currentUser;
 	private $_conn;
 	private $_tableName;
 	private $_identityColumn;
 	private $_select = "Select * from ";
-	private $_filter;
+	private $_filter = "";
     private $_data;
 	private $_actions = [];
+	private $_logger;
 	
-    public function __construct($tableName, $identityColumn,  $conn)
+    public function __construct($currentUser, $tableName, $identityColumn,  $conn)
     {
+		$this->_currentUser = $currentUser;
 		$this->_tableName = $tableName;
 		$this->_identityColumn = $identityColumn;
 		$this->_conn = $conn;
+		$this->_logger = new TextLogger($currentUser);
     }
 	
     public function GetData()
     {
 		$sql = $this->_select.$this->_tableName.$this->_filter;
-		
+		if($this->_filter != "")
+		{
+			$this->_logger->LogSearch($this->_tableName, $this->_filter);
+		}
 		$result = mysqli_query($this->_conn, $sql);
 		echo "$sql";
         $this->_data = $result;

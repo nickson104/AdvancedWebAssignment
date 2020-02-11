@@ -1,10 +1,10 @@
 <?php
-
-namespace Main\Interfaces;
+namespace Interfaces;
 
 interface ILogger
 {
-	public function LogAccess($userName);
+	public function LogAccess();
+	public function LogSearch($table, $filter);
 
 }
 

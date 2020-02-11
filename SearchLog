@@ -1,0 +1,11 @@
+MyAdmin searched the user table for   Admin = 0
+MyAdmin searched the user table for   Admin = 1
+MyAdmin searched the user table for   Admin = 0
+MyAdmin searched the user table for   Admin = 0
+MyAdmin searched the deck table for   User = 'MyAdmin'
+MyAdmin searched the deck table for   User = 'MyAdmin'
+MyAdmin searched the deck table for   User = 'MyAdmin'
+MyAdmin searched the deck table for   User = 'MyAdmin'
+MyAdmin searched the deck table for   User = 'MyAdmin'
+MyAdmin searched the deck table for   User = 'MyAdmin' And Name like '%asdf%'
+MyAdmin searched the deck table for   User = 'MyAdmin'

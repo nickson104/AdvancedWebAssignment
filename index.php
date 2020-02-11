@@ -1,5 +1,10 @@
 <?php
 require_once "config.php";
+
+require_once "TextLogger.php";
+
+use \Interfaces\TextLogger;
+
 session_start();
 
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
@@ -12,7 +17,6 @@ $username_err = $password_err = "";
  
  
 if($_SERVER["REQUEST_METHOD"] == "POST"){
- 
     if(empty(trim($_POST["username"]))){
         $username_err = "Please enter a username.";
     } 
@@ -45,6 +49,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             $_SESSION["username"] = $username; 
 							$_SESSION["admin"] = $admin == "1"; 							
                             
+							$logger = new TextLogger($username);
+							$logger->LogAccess();
+							
                             header("location: MainMenu.php");
                         } else{
                             $password_err = "The password you entered was not valid.";
