@@ -4,7 +4,7 @@ namespace Main\Interfaces;
 
 interface ILogger
 {
-	public function LogAccess();
+	public function LogAccess($userName);
 
 }
 

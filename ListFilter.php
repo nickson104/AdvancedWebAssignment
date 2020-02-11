@@ -1,11 +1,13 @@
 <?php
-namespace Main\List;
+namespace Main;
 
-require_once Object.php;
+require_once 'BasicObject.php';
 
-use \Main\BasicObject;	
+use \Main\BasicObject;
 
-class Filter extends BasicObject
+
+
+class ListFilter extends BasicObject
 {
 	private $_filterColumn;
 	private $_filterColumnType;
@@ -18,16 +20,19 @@ class Filter extends BasicObject
         $this->_filterValue = $filterValue;
     }
 
-	public function GetFilterSQL
+	public function GetFilterSQL ()
 	{
-		switch ($this->$_filterColumnType)
+		switch ($this->_filterColumnType)
 		{
+			case "StringStrict":
+				return "$this->_filterColumn = '$this->_filterValue'";
+			break;
 			case "String":
-				return "$_filterColumn like '%$_filterValue%'";
+				return "$this->_filterColumn like '%$this->_filterValue%'";
 			break;
 			case "Number":
 			case "Bool":
-				return "$_filterColumn = %$_filterValue%";
+				return "$this->_filterColumn = $this->_filterValue";
 			break;
 			default:
 				return "";
