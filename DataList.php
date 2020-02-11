@@ -37,7 +37,6 @@ class DataList
 			$this->_logger->LogSearch($this->_tableName, $this->_filter);
 		}
 		$result = mysqli_query($this->_conn, $sql);
-		echo "$sql";
         $this->_data = $result;
 		$this->Display();
     }
@@ -91,7 +90,13 @@ class DataList
 				}
 				echo "<tr>";
 				foreach ($item as $key => $value) {
-					echo "<td>".htmlentities($value)."</td>";
+					if($key === "Password"){
+						echo "<td>".htmlentities(str_repeat("*", strlen($value)))."</td>";
+					}
+					else
+					{
+						echo "<td>".htmlentities($value)."</td>";
+					}
 					if($key === $this->_identityColumn)
 					{
 						$identity = $value;

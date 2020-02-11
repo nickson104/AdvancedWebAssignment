@@ -56,6 +56,8 @@ $cardDataList->BuildFilter($filters);
 $cardDataList->GetData();
 ?>
 
-<html>
-<a href="NewCard.php"><input id="btnNewCard" type="button" value="Create New Card"/></a>
-</html>
+<?php
+if (isset($_SESSION["admin"]) && $_SESSION["admin"] === true){
+echo "<a href='NewCard.php'><input id='btnNewCard' type='button' value='Create New Card'/></a>";
+}
+?>

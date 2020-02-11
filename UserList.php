@@ -15,7 +15,7 @@ $usernameFilter = "";
 $adminFilter = isset($_POST['adminFilter']) && $_POST['adminFilter']  ? 1 : 0;
 
 $actions = [];
-$action = new ListAction("View", "ViewUser", "View / Edit User", []);
+$action = new ListAction("View", "User", "View / Edit User", []);
 $actions[] = $action;
 $action = new ListAction("Delete", "DeleteUser", "Delete User", []);
 $actions[] = $action;

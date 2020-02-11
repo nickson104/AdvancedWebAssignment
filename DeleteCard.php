@@ -7,8 +7,6 @@ parse_str($_SERVER['QUERY_STRING'], $queries);
 
 $id = "";
 $id = $queries['id'];
-$deck = "";
-$deck = $queries['deck'];
  
 if($id === "")
 {
@@ -16,20 +14,19 @@ if($id === "")
 }
 else
 {
-	$sql = "Insert into deckcard (deck, card) select deck, card from deckcard where Id = ?";
-	try
-	{	
+	$sql = "Delete from Card Where Id = ?";
+			
+	try{
 		if($statement = $conn->prepare($sql)){
 			$statement->bind_param("i", $id);
-			if($statement->execute())
-			{
+			if($statement->execute()){
 				if($statement->affected_rows === 0) 
 				{
-					echo "DeckCard was not added for some reason";
+					echo "Card could not be removed";
 				}
 				else
 				{
-					header("location: Deck.php?id=$deck");
+					header("location: CardList.php");
 				}				
 			} else{
 				echo "Oops! Something went wrong. Please try again later.";
