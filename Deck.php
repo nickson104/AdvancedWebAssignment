@@ -39,6 +39,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 }
 ?>
 
+<html>
+	<h1>Current Cards</h1>
+</html>
+
 <?php
 $actions = [];
 $action = new ListAction("Add", "AddCopyDeckCard", "Add Copy", $querystringItems);
@@ -54,6 +58,7 @@ $deckDataList->GetDataManualSQL($deckListSQL);
 ?>
 
 <html>
+	<h1>Add New Cards</h1>
 	<div>
         <form action="<?php echo htmlspecialchars($_SERVER['REQUEST_URI']); ?>" method="post">
 			<label style="margin-left:20px">Card Name</label>

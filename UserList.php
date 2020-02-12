@@ -35,6 +35,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 
 <html>
+	<h1>Users</h1>
 	<div>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 			<label style="margin-left:20px">Username</label>

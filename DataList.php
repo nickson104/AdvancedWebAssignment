@@ -3,8 +3,10 @@ namespace Main;
 
 require_once 'ListFilter.php';
 require_once 'ListAction.php';
+require_once "Logger.php";
 require_once "TextLogger.php";
 
+use \Interfaces\Logger;
 use \Interfaces\TextLogger;
 use \Main\ListFilter;
 
@@ -26,7 +28,8 @@ class DataList
 		$this->_tableName = $tableName;
 		$this->_identityColumn = $identityColumn;
 		$this->_conn = $conn;
-		$this->_logger = new TextLogger($currentUser);
+		$this->_logger = new Logger();
+		$this->_logger->attach(new TextLogger($username));
     }
 	
     public function GetData()
@@ -44,7 +47,6 @@ class DataList
 	public function GetDataManualSQL($sql)
 	{
 		$result = mysqli_query($this->_conn, $sql);
-		echo "$sql";
         $this->_data = $result;
 		$this->Display();
 	}
@@ -84,23 +86,30 @@ class DataList
 				{
 					echo "<tr>";
 					foreach ($item as $key => $value) {
-						echo "<th>".htmlentities($key)."</th>";
+						if($key !== "Id")
+						{
+							echo "<th>".htmlentities($key)."</th>";
+						}
 					}
 					echo "</tr>";
 				}
 				echo "<tr>";
 				foreach ($item as $key => $value) {
-					if($key === "Password"){
-						echo "<td>".htmlentities(str_repeat("*", strlen($value)))."</td>";
-					}
-					else
-					{
-						echo "<td>".htmlentities($value)."</td>";
-					}
 					if($key === $this->_identityColumn)
 					{
 						$identity = $value;
 					}
+					
+					if($key !== "Id")
+					{
+						if($key === "Password"){
+							echo "<td>".htmlentities(str_repeat("*", strlen($value)))."</td>";
+						}
+						else
+						{
+							echo "<td>".htmlentities($value)."</td>";
+						}
+					}		
 				}
 				foreach($this->_actions as $action)
 				{

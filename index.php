@@ -1,8 +1,10 @@
 <?php
 require_once "config.php";
 
+require_once "Logger.php";
 require_once "TextLogger.php";
 
+use \Interfaces\Logger;
 use \Interfaces\TextLogger;
 
 session_start();
@@ -49,7 +51,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             $_SESSION["username"] = $username; 
 							$_SESSION["admin"] = $admin == "1"; 							
                             
-							$logger = new TextLogger($username);
+							$logger = new Logger();
+							$logger->attach(new TextLogger($username));
 							$logger->LogAccess();
 							
                             header("location: MainMenu.php");
